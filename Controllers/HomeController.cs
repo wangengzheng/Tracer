@@ -8,6 +8,7 @@ using System.Net.WebSockets;
 using Tracer.Models;
 using Aiursoft.Pylon.Attributes;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Tracer.Controllers
 {
@@ -67,6 +68,14 @@ namespace Tracer.Controllers
         {
             HttpContext.Response.Headers.Add("Content-Length", _length.ToString());
             return new FileContentResult(GetData(), "application/octet-stream");
+        }
+
+
+        [AiurNoCache]
+        [HttpPost]
+        public IActionResult Upload(string str)
+        {
+            return Ok("revice file");
         }
     }
 }

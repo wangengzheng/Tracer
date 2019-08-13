@@ -12,6 +12,7 @@ var trig = function (trigger, value) {
 
 var ctx = document.getElementById('httpChart').getContext('2d');
 var downloadChartCtx = document.getElementById('downloadChart').getContext('2d');
+var uploadChartCtx = document.getElementById("uploadChart").getContext('2d');
 var wsChartCtx = document.getElementById('wsChart').getContext('2d');
 
 var chartData = {
@@ -35,6 +36,18 @@ var downloadchartData = {
         data: []
     }]
 };
+
+var uploadchartData = {
+    labels: [],
+    datasets: [{
+        label: "Upload Speed",
+        backgroundColor: 'rgb(70, 170, 252)',
+        borderColor: 'rgb(70, 170, 252)',
+        fill: true,
+        data: []
+    }]
+};
+
 
 var wschartData = {
     labels: [],
@@ -84,6 +97,13 @@ window.myLine = new Chart(ctx, {
 window.myDownloadLine = new Chart(downloadChartCtx, {
     type: 'line',
     data: downloadchartData,
+    options: chartOption
+});
+
+
+window.myUploadLine = new Chart(uploadChartCtx, {
+    type: 'line',
+    data: uploadchartData,
     options: chartOption
 });
 

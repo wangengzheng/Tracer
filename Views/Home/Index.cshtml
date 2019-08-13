@@ -66,6 +66,33 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
+                    <h5 class="card-title">Upload Speed</h5>
+                    <p class="card-text">测试上传速率.</p>
+                    <div class="form">
+                        <div class="form-group">
+                            <label for="speedlagfilter">Log filter(MB/s)</label>
+                            <input type="number" class="form-control" id="speedlagfilter" value="0.7">
+                        </div>
+                        <button class="btn btn-primary" id="downloadbutton" onclick="upload()">Start Test</button>
+                        <button class="btn btn-secondary" id="pingbutton" onclick="stopUpload()">Stop Test</button>
+                    </div>
+                    <p class="test-status"><pre id="uploadStatus"></pre></p>
+                    <p class="test-status"><code id="uploadMax"></code></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-3">
+            <div class="card mb-2 tests-card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Upload Speed</h5>
+                    <canvas id="uploadChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <div class="card mb-2 tests-card h-100">
+                <div class="card-body">
                     <h5 class="card-title">WebSocket Lag</h5>
                     <p class="card-text">This number means how much gap time between current server event and last server event. The number should be close to 100ms. More than 120ms or less than 90ms is not proper.</p>
                     <div class="form">
