@@ -23,7 +23,7 @@ namespace Tracer.Controllers
                 _data = new byte[_length];
                 for (int i = 0; i < _length; i++)
                 {
-                    _data[i] = 1;
+                    _data[i] = 97;
                 }
             }
             return _data;
