@@ -39,6 +39,7 @@ namespace Tracer
             {
                 app.UseEnforceHttps();
             }
+            app.UsePathBase("/tracer");
             app.UseWebSockets();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
