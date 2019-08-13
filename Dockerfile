@@ -1,11 +1,19 @@
-FROM microsoft/aspnetcore-build as build-env
-WORKDIR /src
-
-COPY . .
-RUN dotnet restore
-RUN dotnet publish --no-restore -c Release -o /build
-
-FROM microsoft/aspnetcore
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
 WORKDIR /app
-COPY --from=build-env /build .
-ENTRYPOINT ["dotnet","./Tracer.dll"]
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+WORKDIR /src
+COPY ["Tracer.csproj", ""]
+RUN dotnet restore "Tracer.csproj"
+COPY . .
+WORKDIR "/src/"
+RUN dotnet build "Tracer.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "Tracer.csproj" -c Release -o /app
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "Tracer.dll"]
