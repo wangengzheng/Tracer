@@ -118,4 +118,5 @@ var startAll = function () {
     WsTest();
     ping();
     download();
+    upload();
 };

@@ -14,7 +14,7 @@ var download = function () {
 var startdownload = function () {
     //prepare
     var st = new Date();
-    $.get('/home/download?t=' + st.getMilliseconds(), function (data) {
+    $.get('/tracer/home/download?t=' + st.getMilliseconds(), function (data) {
         if (downloadStopped) {
             return;
         }

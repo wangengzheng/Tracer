@@ -18,7 +18,7 @@ var WsTest = function () {
 var startWsTest = function () {
     //prepare
     var wsStartTime = new Date();
-    webSocket = new WebSocket(getWSAddress() + "/Home/Pushing");
+    webSocket = new WebSocket(getWSAddress() + "/tracer/Home/Pushing");
     webSocket.onopen = function () {
         $("#spanStatus").text("connected");
     };
