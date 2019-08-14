@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     @this.UseDisableZoom()
-    <title>Tracer App - A simple network speed test app</title>
+    <title>简单网络测试工具</title>
     @this.UseAiurFavicon()
-    @this.UseAiurMarketCss()
+    @*@this.UseAiurMarketCss()*@
+    <link rel="stylesheet" href="~/css/AiurCore.min.css" />
+    <link rel="stylesheet" href="~/css/AiurMarket.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -23,12 +25,12 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="@ServiceLocation.WWW">Aiursoft</a>
+                        <a class="nav-link" href="#"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/AiursoftWeb/Tracer">
+                        <a class="nav-link" href="#">
                             <i class="fa fa-github"></i>
-                            GitHub
+
                         </a>
                     </li>
                 </ul>
@@ -38,17 +40,21 @@
     @RenderBody()
     <footer class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-            <span class="navbar-text">&copy; @DateTime.Now.Year - <a href="@ServiceLocation.WWW">Aiursoft</a></span>
+            <span class="navbar-text">&copy; @DateTime.Now.Year<a href="#">网络测试</a></span>
         </div>
     </footer>
     @this.UseScrollToTop()
-    @this.UseAiurMarketJs()
+
+    @*@this.UseAiurMarketJs()*@
+    <script src="~/js/AiurCore.min.js"></script>
+    <script src="~/js/AiurMarket.min.js"></script>
     <script src="~/js/ws.js"></script>
     <script src="~/js/http.js"></script>
     <script src="~/js/down.js"></script>
     <script src="~/js/upload.js"></script>
-    <script src="@ServiceLocation.UI/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="~/js/chart.min.js"></script>
+    @*<script src="@ServiceLocation.UI/node_modules/chart.js/dist/Chart.bundle.min.js"></script>*@
     <script src="~/js/site.js"></script>
-    @Html.Raw(JavaScriptSnippet.FullScript)
+    @*@Html.Raw(JavaScriptSnippet.FullScript)*@
     @RenderSection("scripts", required: false)
 </body>

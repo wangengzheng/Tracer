@@ -1,10 +1,15 @@
 ﻿
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-4">Tracer</h1>
-        <p class="lead">Tracer is a simple network quality testing app.</p>
-        <p>Access from <code>@Context.Connection.RemoteIpAddress.ToString()</code><span class="badge badge-secondary ml-2" id="spanStatus">Idle</span></p>
-        <p><button class="btn btn-success btn-lg mt-4" id="startAllButton" onclick="startAll()" role="button">Start All Tests</button></p>
+        @*<h1 class="display-4">Tracer</h1>*@
+        <h1 class="display-4">简单的网络测试.</h1>
+        <p><code></code><span class="badge badge-secondary ml-2" id="spanStatus">服务器时间: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ffffff")</span></p>
+        <p>
+            <button class="btn btn-success btn-lg mt-4" id="startAllButton" onclick="startAll()" role="button">开始所有</button>
+            <button class="btn btn-primary btn-lg mt-4" id="startAllButton" onclick="stopAll()" role="button">暂停所有</button>
+            <button class="btn btn-danger btn-lg mt-4" id="startAllButton" onclick="restLag()" role="button">重置图表</button>
+            
+        </p>
     </div>
 </div>
 <div class="container">
@@ -12,15 +17,15 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">HTTP Lag</h5>
+                    <h5 class="card-title">HTTP 简单请求测试</h5>
                     <p class="card-text">测试服务器心跳包返回时间.</p>
                     <div class="form">
                         <div class="form-group">
-                            <label for="pinglagfilter">Log filter(ms)</label>
+                            <label for="pinglagfilter">日志过滤器(ms)</label>
                             <input type="number" class="form-control" id="pinglagfilter" value="200">
                         </div>
-                        <button class="btn btn-primary" id="pingbutton" onclick="ping()">Start Test</button>
-                        <button class="btn btn-secondary" id="pingbutton" onclick="stopPing()">Stop Test</button>
+                        <button class="btn btn-primary" id="pingbutton" onclick="ping()">开始</button>
+                        <button class="btn btn-secondary" id="pingbutton" onclick="stopPing()">暂停</button>
                     </div>
                     <p class="test-status"><pre id="httpStatus"></pre></p>
                     <p class="test-status"><code id="httpMax"></code></p>
@@ -30,7 +35,7 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">HTTP Lag</h5>
+                    <h5 class="card-title">HTTP 图表</h5>
                     <canvas id="httpChart"></canvas>
                 </div>
             </div>
@@ -39,15 +44,15 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Download Speed</h5>
+                    <h5 class="card-title">下载速度</h5>
                     <p class="card-text">测试下载速率</p>
                     <div class="form">
                         <div class="form-group">
-                            <label for="speedlagfilter">Log filter(MB/s)</label>
+                            <label for="speedlagfilter">日志过滤器(MB/s)</label>
                             <input type="number" class="form-control" id="speedlagfilter" value="0.7">
                         </div>
-                        <button class="btn btn-primary" id="downloadbutton" onclick="download()">Start Test</button>
-                        <button class="btn btn-secondary" id="pingbutton" onclick="stopDownload()">Stop Test</button>
+                        <button class="btn btn-primary" id="downloadbutton" onclick="download()">开始</button>
+                        <button class="btn btn-secondary" id="pingbutton" onclick="stopDownload()">暂停</button>
                     </div>
                     <p class="test-status"><pre id="downStatus"></pre></p>
                     <p class="test-status"><code id="downMax"></code></p>
@@ -57,7 +62,7 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Download Speed</h5>
+                    <h5 class="card-title">下载 图表</h5>
                     <canvas id="downloadChart"></canvas>
                 </div>
             </div>
@@ -70,11 +75,11 @@
                     <p class="card-text">测试上传速率.</p>
                     <div class="form">
                         <div class="form-group">
-                            <label for="speedlagfilter">Log filter(MB/s)</label>
+                            <label for="speedlagfilter">日志过滤器(MB/s)</label>
                             <input type="number" class="form-control" id="speedlagfilter" value="0.7">
                         </div>
-                        <button class="btn btn-primary" id="uploadbutton" onclick="upload()">Start Test</button>
-                        <button class="btn btn-secondary" id="pingbutton" onclick="stopUpload()">Stop Test</button>
+                        <button class="btn btn-primary" id="uploadbutton" onclick="upload()">开始</button>
+                        <button class="btn btn-secondary" id="pingbutton" onclick="stopUpload()">暂停</button>
                     </div>
                     <p class="test-status"><pre id="uploadStatus"></pre></p>
                     <p class="test-status"><code id="uploadMax"></code></p>
@@ -84,7 +89,7 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Upload Speed</h5>
+                    <h5 class="card-title">上传 图表</h5>
                     <canvas id="uploadChart"></canvas>
                 </div>
             </div>
@@ -93,15 +98,15 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">WebSocket Lag</h5>
-                    <p class="card-text">This number means how much gap time between current server event and last server event. The number should be close to 100ms. More than 120ms or less than 90ms is not proper.</p>
+                    <h5 class="card-title">WebSocket 测试</h5>
+                    <p class="card-text">当前服务器事件与上次服务器事件之间的间隔时间。</p>
                     <div class="form">
                         <div class="form-group">
-                            <label for="wslagfilter">Log filter(ms)</label>
+                            <label for="wslagfilter">日志过滤器(ms)</label>
                             <input type="number" class="form-control" id="wslagfilter" value="300">
                         </div>
-                        <button class="btn btn-primary" id="wsbutton" onclick="WsTest()">Start Test</button>
-                        <button class="btn btn-secondary" id="pingbutton" onclick="stopWsTest()">Stop Test</button>
+                        <button class="btn btn-primary" id="wsbutton" onclick="WsTest()">开始</button>
+                        <button class="btn btn-secondary" id="pingbutton" onclick="stopWsTest()">暂停</button>
                     </div>
                     <p class="test-status"><pre id="wsStatus"></pre></p>
                     <p class="test-status"><code id="wsmax"></code></p>
@@ -111,7 +116,7 @@
         <div class="col-md-6 mt-3">
             <div class="card mb-2 tests-card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">WebSocket Lag</h5>
+                    <h5 class="card-title">WebSocket 图表</h5>
                     <canvas id="wsChart"></canvas>
                 </div>
             </div>
@@ -123,13 +128,13 @@
         <div class="col-sm-12 px-1">
             <div class="card mb-2 tests-card">
                 <div class="card-body">
-                    <h5 class="card-title">Bad requests log</h5>
+                    <h5 class="card-title">日志输出</h5>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-sm" id="logTable">
                             <tr>
-                                <th>Time</th>
-                                <th>Trigger</th>
-                                <th>Value</th>
+                                <th>时间</th>
+                                <th>触发器</th>
+                                <th>值</th>
                             </tr>
                         </table>
                     </div>

@@ -33,8 +33,8 @@ var startdownload = function () {
             trig('Downloader', speed + 'MB/s');
         }
         //update view
-        $('#downStatus').html('Speed: ' + speed.toFixed(2) + 'MB/s');
-        $('#downMax').html('Min: ' + minspeed.toFixed(2) + 'MB/s');
+        $('#downStatus').html('速度: ' + speed.toFixed(2) + 'MB/s');
+        $('#downMax').html('最小: ' + minspeed.toFixed(2) + 'MB/s');
 
         if (downloadchartData.labels.length > 25) {
             downloadchartData.labels.shift();

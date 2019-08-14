@@ -29,8 +29,8 @@ var startping = function () {
             trig('HTTP Get', lag + 'ms');
         }
         //update view
-        $('#httpStatus').html('Current: ' + lag + 'ms');
-        $('#httpMax').html('Max lag: ' + pingMaxlag + 'ms');
+        $('#httpStatus').html('当前: ' + lag + 'ms');
+        $('#httpMax').html('最大: ' + pingMaxlag + 'ms');
         if (chartData.labels.length > 25) {
             chartData.labels.shift();
             chartData.datasets[0].data.shift();

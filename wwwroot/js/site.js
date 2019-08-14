@@ -18,7 +18,7 @@ var wsChartCtx = document.getElementById('wsChart').getContext('2d');
 var chartData = {
     labels: [],
     datasets: [{
-        label: "HTTP Lag",
+        label: "HTTP 简单请求",
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
         fill: false,
@@ -29,7 +29,7 @@ var chartData = {
 var downloadchartData = {
     labels: [],
     datasets: [{
-        label: "Download Speed",
+        label: "下载速度",
         backgroundColor: 'rgb(70, 170, 252)',
         borderColor: 'rgb(70, 170, 252)',
         fill: true,
@@ -40,7 +40,7 @@ var downloadchartData = {
 var uploadchartData = {
     labels: [],
     datasets: [{
-        label: "Upload Speed",
+        label: "上传速度",
         backgroundColor: 'rgb(70, 170, 252)',
         borderColor: 'rgb(70, 170, 252)',
         fill: true,
@@ -52,7 +52,7 @@ var uploadchartData = {
 var wschartData = {
     labels: [],
     datasets: [{
-        label: "WebSocket Connection",
+        label: "WebSocket 连接速度",
         backgroundColor: 'rgb(2, 232, 99)',
         borderColor: 'rgb(2, 232, 99)',
         fill: false,
@@ -119,4 +119,31 @@ var startAll = function () {
     ping();
     download();
     upload();
+};
+
+var stopAll = function () {
+    $('#startAllButton').removeAttr('disabled', 'disabled');
+    stopPing();
+    stopDownload();
+    stopUpload();
+    stopWsTest();
+};
+
+var restLag = function () {
+
+    chartData.datasets[0].data = [];
+    chartData.labels = [];
+    myLine.update();
+
+    downloadchartData.datasets[0].data = [];
+    downloadchartData.labels = [];
+    myDownloadLine.update();
+
+    uploadchartData.datasets[0].data = [];
+    uploadchartData.labels = [];
+    myUploadLine.update();
+        
+    wschartData.datasets[0].data = [];
+    wschartData.labels = [];
+    myWSLine.update();    
 };

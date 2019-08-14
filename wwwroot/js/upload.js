@@ -34,8 +34,8 @@ var startupload = function () {
             trig('uploader', speed + 'MB/s');
         }
         //update view
-        $('#uploadStatus').html('Speed: ' + speed.toFixed(2) + 'MB/s');
-        $('#uploadMax').html('Min: ' + minspeed.toFixed(2) + 'MB/s');
+        $('#uploadStatus').html('速度: ' + speed.toFixed(2) + 'MB/s');
+        $('#uploadMax').html('最小: ' + minspeed.toFixed(2) + 'MB/s');
 
         if (uploadchartData.labels.length > 25) {
             uploadchartData.labels.shift();

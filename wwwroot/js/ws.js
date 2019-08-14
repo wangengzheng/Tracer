@@ -24,7 +24,7 @@ var startWsTest = function () {
     };
     webSocket.onmessage = function (evt) {
         //show message
-        $("#spanStatus").html('Server Time: ' + evt.data);
+        $("#spanStatus").html('服务器时间: ' + evt.data);
         //get time
         var wslag = new Date() - wsStartTime;
         wsStartTime = new Date();
@@ -37,8 +37,8 @@ var startWsTest = function () {
             trig('WebSockeet', wslag + 'ms');
         }
         //update view
-        $('#wsStatus').html('Current: ' + wslag + 'ms');
-        $("#wsmax").html('Max: ' + wsMaxLag + 'ms');
+        $('#wsStatus').html('当前: ' + wslag + 'ms');
+        $("#wsmax").html('最大: ' + wsMaxLag + 'ms');
 
         if (wschartData.labels.length > 200) {
             wschartData.labels.shift();
